@@ -1,0 +1,96 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
+
+import React, { Component } from 'react';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  SectionList,
+  Button,
+  AsyncStorage,
+  DatePickerAndroid,
+  ToastAndroid
+} from 'react-native';
+
+//var Data = [{data: [{name:'1qwe'},{name:'dsa'}], title: 'ewq'}]
+var Data = []
+
+export default class App extends Component<{}> {
+  constructor(props) {
+    super(props);
+    this.state = { dataList : [ ] };
+
+
+
+
+
+  }
+
+async componentDidMount(){
+  AsyncStorage.getItem('ToDoList', (err, result) => {
+        this.setState({dataList:JSON.parse(result)})
+//  console.warn(this.state.dataList)
+      }
+    )
+
+}
+  render() {
+
+//AsyncStorage.setItem('ToDoList', JSON.stringify([{data: [{name:'1qwe'},{name:'dsa'}], title: 'ewq'}]));
+
+/*listView = (
+  <SectionList
+  renderItem={({item}) => <Button title={item.name} />}
+  renderSectionHeader={({section}) => <Button color="#841584" title={section.title} />}
+  sections={this.state.dataList}
+/>
+);*/
+
+
+var json = {
+  "date":"",
+  "items":[]
+}
+
+json.date = '321'
+json.items.push(['qwe'])
+json.items.push(['ewq'])
+
+
+Data.push(json);
+Data.forEach(function(item,i,Data){console.warn(i+" "+item.date)})
+
+console.warn(json);
+    return (
+  //    <View>
+  //  {listView}
+  <Text>ipo</Text>
+  //  </View>
+
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+});
